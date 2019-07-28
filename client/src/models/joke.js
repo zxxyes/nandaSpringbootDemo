@@ -1,4 +1,4 @@
-import { getJokes, getJokeById, deleteJoke, updateJoke, newJoke } from '../service/joke'
+import { getAllJokes, getJokeById, deleteJoke, updateJoke, createJoke } from '../services/joke'
 
 export default {
   namespace: 'joke',
@@ -23,7 +23,7 @@ export default {
   },
   effects: {
     *fetchJokeList(_, { call, put }) {
-      const list = yield call(getJokes)
+      const list = yield call(getAllJokes)
       yield put({ type: 'updateState', newState: { list } })
     },
 
@@ -43,7 +43,7 @@ export default {
     },
 
     *newJoke({ body }, { call, put }) {
-      const list = yield call(newJoke, body)
+      const list = yield call(createJoke, body)
       yield put({ type: 'updateState', newState: { list } })
     }
   }
